@@ -2,6 +2,7 @@ package models;
 
 import Utils.ApiClient;
 import Utils.DbClient;
+import Utils.EndPoints;
 import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import handlers.UserHandler;
@@ -36,7 +37,7 @@ public class User {
 
 	public static User getUserFromApi(long id) throws IOException {
 		HttpEntity httpEntity = new ApiClient()
-				.setPathSegments("user", String.valueOf(id))
+				.setPathSegments(EndPoints.user, String.valueOf(id))
 				.sendRequestAndGetResponse().getEntity();
 
 		ObjectMapper objectMapper = new ObjectMapper();

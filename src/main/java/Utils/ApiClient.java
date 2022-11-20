@@ -43,7 +43,7 @@ public class ApiClient {
 
 	String getUrl() {
 		return uriBuilder.setScheme("http")
-				.setHost(EndPoints.host)
+				.setHost(EndPoints.ip)
 				.setPort(EndPoints.port)
 				.toString();
 	}
