@@ -1,6 +1,5 @@
-package Utils;
+package utils;
 
-import models.Sex;
 import models.User;
 import org.apache.commons.lang3.RandomStringUtils;
 import org.apache.commons.lang3.StringUtils;

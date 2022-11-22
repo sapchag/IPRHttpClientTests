@@ -1,7 +1,5 @@
-package Utils;
+package utils;
 
-import handlers.UserHandler;
-import models.User;
 import org.apache.commons.dbutils.DbUtils;
 import org.apache.commons.dbutils.QueryRunner;
 import org.apache.commons.dbutils.handlers.BeanListHandler;

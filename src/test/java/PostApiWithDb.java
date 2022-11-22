@@ -1,8 +1,7 @@
-import Utils.RandomTestCar;
-import Utils.RandomTestUser;
+import utils.RandomTestCar;
+import utils.RandomTestUser;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import models.Car;
-import models.Sex;
 import models.User;
 import org.apache.http.HttpResponse;
 import org.apache.http.client.HttpClient;

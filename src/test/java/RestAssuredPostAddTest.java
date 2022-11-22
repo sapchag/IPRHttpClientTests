@@ -1,16 +1,13 @@
-import Utils.EndPoints;
-import Utils.RandomTestCar;
+import utils.EndPoints;
+import utils.RandomTestCar;
 import com.fasterxml.jackson.core.JsonProcessingException;
-import com.fasterxml.jackson.databind.ObjectMapper;
 import io.restassured.RestAssured;
 import io.restassured.builder.RequestSpecBuilder;
 import io.restassured.filter.log.LogDetail;
 import io.restassured.http.ContentType;
-import io.restassured.mapper.TypeRef;
 import io.restassured.path.json.config.JsonPathConfig;
 import io.restassured.specification.RequestSpecification;
 import models.Car;
-import models.User;
 import org.junit.jupiter.api.*;
 
 import java.math.BigDecimal;
@@ -18,7 +15,6 @@ import java.sql.SQLException;
 import java.util.List;
 
 import static io.restassured.RestAssured.given;
-import static io.restassured.RestAssured.when;
 import static io.restassured.config.JsonConfig.jsonConfig;
 import static io.restassured.config.RestAssuredConfig.newConfig;
 import static org.assertj.core.api.Assertions.assertThat;

@@ -1,22 +1,17 @@
-import Utils.EndPoints;
+import utils.EndPoints;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import io.restassured.RestAssured;
 import io.restassured.builder.RequestSpecBuilder;
 import io.restassured.filter.log.LogDetail;
 import io.restassured.http.ContentType;
-import io.restassured.path.json.config.JsonPathConfig;
 import io.restassured.specification.RequestSpecification;
-import models.User;
 import org.junit.jupiter.api.*;
 
 import java.math.BigDecimal;
 import java.sql.SQLException;
 
 import static io.restassured.RestAssured.given;
-import static io.restassured.config.JsonConfig.jsonConfig;
-import static io.restassured.config.RestAssuredConfig.newConfig;
 import static org.assertj.core.api.Assertions.assertThat;
-import static org.hamcrest.Matchers.equalTo;
 import static org.hamcrest.Matchers.is;
 
 @TestMethodOrder(MethodOrderer.OrderAnnotation.class)

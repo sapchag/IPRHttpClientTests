@@ -1,13 +1,14 @@
 package models;
 
-import Utils.ApiClient;
-import Utils.DbClient;
-import Utils.EndPoints;
+import utils.ApiClient;
+import utils.DbClient;
+import utils.EndPoints;
 import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import handlers.UserHandler;
 import org.apache.commons.lang3.StringUtils;
 import org.apache.http.HttpEntity;
+import utils.RestPaths;
 
 import java.io.IOException;
 import java.math.BigDecimal;
@@ -37,7 +38,7 @@ public class User {
 
 	public static User getUserFromApi(long id) throws IOException {
 		HttpEntity httpEntity = new ApiClient()
-				.setPathSegments(EndPoints.user, String.valueOf(id))
+				.setPathSegments(RestPaths.user, String.valueOf(id))
 				.sendRequestAndGetResponse().getEntity();
 
 		ObjectMapper objectMapper = new ObjectMapper();
@@ -46,7 +47,7 @@ public class User {
 
 	public static List<User> getUsersFromApi() throws IOException {
 		HttpEntity httpEntity = new ApiClient()
-				.setPathSegments("users")
+				.setPathSegments(RestPaths.users)
 				.sendRequestAndGetResponse().getEntity();
 
 		ObjectMapper objectMapper = new ObjectMapper();

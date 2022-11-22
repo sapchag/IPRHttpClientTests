@@ -1,9 +1,6 @@
-package Utils;
+package utils;
 
-import com.fasterxml.jackson.core.JsonProcessingException;
-import com.fasterxml.jackson.databind.ObjectMapper;
 import models.Car;
-import org.apache.commons.dbutils.handlers.BeanListHandler;
 import org.apache.commons.lang3.RandomStringUtils;
 import org.apache.commons.lang3.StringUtils;
 

@@ -9,7 +9,7 @@ import java.util.Random;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
-public class GetApiWithDb {
+public class GetApiWithDb_ {
 
 	@Test
 	public void getUsers() throws Exception {
@@ -19,8 +19,6 @@ public class GetApiWithDb {
 		for (User apiUser : apiUsers) {
 			User dbUser = dbUsers.stream().filter(s->s.getId().equals(apiUser.getId()))
 							.findFirst().orElseThrow();
-			apiUser.print();
-			dbUser.print();
 			assertThat(apiUser).isEqualToComparingFieldByField(dbUser);
 		}
 	}
@@ -39,7 +37,11 @@ public class GetApiWithDb {
 		List<Car> dbCars = Car.getCarsFromDb();
 		List<Car> apiCars = Car.getApiCars();
 
-		assertThat(apiCars).containsExactlyInAnyOrderElementsOf(dbCars);
+		for (Car apiCar : apiCars) {
+			Car dbCar = dbCars.stream().filter(s->s.getId().equals(apiCar.getId()))
+					.findFirst().orElseThrow();
+			assertThat(apiCar).isEqualToComparingFieldByField(dbCar);
+		}
 	}
 
 }

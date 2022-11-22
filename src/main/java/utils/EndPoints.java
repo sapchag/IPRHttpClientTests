@@ -1,4 +1,4 @@
-package Utils;
+package utils;
 
 public final class EndPoints {
 
