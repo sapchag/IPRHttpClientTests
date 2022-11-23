@@ -35,7 +35,6 @@ class EditRestTest {
 		System.out.println(httpResponse.getEntity().getContent());
 		ObjectMapper objectMapper = new ObjectMapper();
 		User user = objectMapper.readValue(httpResponse.getEntity().getContent(), User.class);
-		user.print();
 
 	}
 

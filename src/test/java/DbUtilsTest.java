@@ -43,9 +43,5 @@ public class DbUtilsTest {
         List<User> users
                 = runner.query(connection, "SELECT * FROM person", beanListHandler);
 
-        for (User user:users){
-            user.print();
-        }
-
     }
 }

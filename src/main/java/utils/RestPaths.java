@@ -9,6 +9,7 @@ public class RestPaths {
     public static final String car = "car";
 
     public static final String addCar = "addCar";
+    public static final String addUser = "addUser";
     public static final String buyCar = "buyCar";
     public static final String settle = "settle";
     public static final String house = "house";

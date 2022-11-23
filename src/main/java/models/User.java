@@ -1,141 +1,97 @@
 package models;
 
-import utils.ApiClient;
-import utils.DbClient;
-import utils.EndPoints;
-import com.fasterxml.jackson.core.type.TypeReference;
-import com.fasterxml.jackson.databind.ObjectMapper;
-import handlers.UserHandler;
+import com.fasterxml.jackson.annotation.JsonInclude;
+import org.apache.commons.lang3.ObjectUtils;
 import org.apache.commons.lang3.StringUtils;
-import org.apache.http.HttpEntity;
-import utils.RestPaths;
 
-import java.io.IOException;
 import java.math.BigDecimal;
-import java.sql.SQLException;
-import java.util.List;
 import java.util.Objects;
 
 public class User {
 
-	private Integer id;
-	private String firstName;
-	private String secondName;
-	private Integer age;
-	private Boolean sex;
-	private BigDecimal money;
+    @JsonInclude(JsonInclude.Include.NON_NULL)
+    private Integer id;
+    private String firstName;
+    private String secondName;
+    private Integer age;
+    private String sex;
+    private BigDecimal money;
 
-	public User() {
-	}
+    public User() {
+    }
 
-	public static User getUserFromDb(Integer id) throws SQLException, ClassNotFoundException {
-		return new DbClient().getList("SELECT * FROM person where id=" + id.toString(), new UserHandler()).get(0);
-	}
 
-	public static List<User> getUsersFromDb() throws SQLException, ClassNotFoundException {
-		return new DbClient().getList("SELECT * FROM person", new UserHandler());
-	}
+    public User(Integer id, String firstName, String secondName, Integer age, String sex, BigDecimal money) {
+        this.id = id;
+        this.firstName = firstName;
+        this.secondName = secondName;
+        this.age = age;
+        this.sex = sex;
+        this.money = money;
+    }
 
-	public static User getUserFromApi(long id) throws IOException {
-		HttpEntity httpEntity = new ApiClient()
-				.setPathSegments(RestPaths.user, String.valueOf(id))
-				.sendRequestAndGetResponse().getEntity();
+    public Integer getId() {
+        return id;
+    }
 
-		ObjectMapper objectMapper = new ObjectMapper();
-		return objectMapper.readValue(httpEntity.getContent(), User.class);
-	}
+    public void setId(Integer id) {
+        this.id = id;
+    }
 
-	public static List<User> getUsersFromApi() throws IOException {
-		HttpEntity httpEntity = new ApiClient()
-				.setPathSegments(RestPaths.users)
-				.sendRequestAndGetResponse().getEntity();
+    public String getFirstName() {
+        return firstName;
+    }
 
-		ObjectMapper objectMapper = new ObjectMapper();
-		return objectMapper.readValue(
-				httpEntity.getContent(), new TypeReference<>() {
-				});
-	}
+    public void setFirstName(String firstName) {
+        this.firstName = firstName;
+    }
 
-	public void print() {
-		System.out.print("Id:" + getId());
-		System.out.print(" FirstName:" + getFirstName());
-		System.out.print(" SecondName:" + getSecondName());
-		System.out.print(" Age:" + getAge());
-		System.out.print(" Sex:" + getSex());
-		System.out.println(" Money:" + getMoney());
-	}
+    public String getSecondName() {
+        return secondName;
+    }
 
-	public User(Integer id, String firstName, String secondName, Integer age, Boolean sex, BigDecimal money) {
-		this.id = id;
-		this.firstName = firstName;
-		this.secondName = secondName;
-		this.age = age;
-		this.sex = sex;
-		this.money = money;
-	}
+    public void setSecondName(String secondName) {
+        this.secondName = secondName;
+    }
 
-	public Integer getId() {
-		return id;
-	}
+    public Integer getAge() {
+        return age;
+    }
 
-	public void setId(Integer id) {
-		this.id = id;
-	}
+    public void setAge(Integer age) {
+        this.age = age;
+    }
 
-	public String getFirstName() {
-		return firstName;
-	}
+    public String getSex() {
+        return sex;
+    }
 
-	public void setFirstName(String firstName) {
-		this.firstName = firstName;
-	}
+    public void setSex(Boolean sex) {
+        this.sex = sex==null ? null : sex ? "MALE" : "FEMALE";
+    }
 
-	public String getSecondName() {
-		return secondName;
-	}
+    public void setSex(String sex) {
+        this.sex = sex;
+    }
 
-	public void setSecondName(String secondName) {
-		this.secondName = secondName;
-	}
+    public BigDecimal getMoney() {
+        return money;
+    }
 
-	public Integer getAge() {
-		return age;
-	}
+    public void setMoney(BigDecimal money) {
+        this.money = money;
+    }
 
-	public void setAge(Integer age) {
-		this.age = age;
-	}
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        User user = (User) o;
+        return Objects.equals(getId(), user.getId()) && Objects.equals(getFirstName(), user.getFirstName()) && Objects.equals(getSecondName(), user.getSecondName()) && Objects.equals(getAge(), user.getAge()) && getSex() == user.getSex() && Objects.equals(getMoney(), user.getMoney());
+    }
 
-	public Boolean getSex() {
-		return sex;
-	}
-
-	public void setSex(Boolean sex) {
-		this.sex = sex;
-	}
-
-	public void setSex(String sex) {
-		this.sex = StringUtils.isEmpty(sex) ? null : sex.equals("MALE") ? true : false;
-	}
-
-	public BigDecimal getMoney() {
-		return money;
-	}
-
-	public void setMoney(BigDecimal money) {
-		this.money = money;
-	}
-
-	@Override
-	public boolean equals(Object o) {
-		if (this == o) return true;
-		if (o == null || getClass() != o.getClass()) return false;
-		User user = (User) o;
-		return Objects.equals(getId(), user.getId()) && Objects.equals(getFirstName(), user.getFirstName()) && Objects.equals(getSecondName(), user.getSecondName()) && Objects.equals(getAge(), user.getAge()) && getSex() == user.getSex() && Objects.equals(getMoney(), user.getMoney());
-	}
-
-	@Override
-	public int hashCode() {
-		return Objects.hash(getId(), getFirstName(), getSecondName(), getAge(), getSex(), getMoney());
-	}
+    @Override
+    public int hashCode() {
+        return Objects.hash(getId(), getFirstName(), getSecondName(), getAge(), getSex(), getMoney());
+    }
 }

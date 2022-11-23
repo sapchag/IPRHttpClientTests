@@ -1,8 +1,9 @@
-package utils;
+package utils.Car;
 
 import models.Car;
 import org.apache.commons.lang3.RandomStringUtils;
 import org.apache.commons.lang3.StringUtils;
+import utils.DbClient;
 
 import java.math.BigDecimal;
 import java.math.RoundingMode;

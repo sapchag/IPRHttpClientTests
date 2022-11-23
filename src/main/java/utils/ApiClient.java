@@ -2,70 +2,97 @@ package utils;
 
 import org.apache.http.HttpResponse;
 import org.apache.http.client.HttpClient;
-import org.apache.http.client.methods.*;
+import org.apache.http.client.methods.HttpGet;
+import org.apache.http.client.methods.HttpPost;
+import org.apache.http.client.methods.HttpPut;
+import org.apache.http.client.methods.HttpRequestBase;
 import org.apache.http.client.utils.URIBuilder;
+import org.apache.http.entity.StringEntity;
 import org.apache.http.impl.client.HttpClients;
+
 import java.io.IOException;
 import java.io.UnsupportedEncodingException;
+
+import static org.assertj.core.api.Assertions.assertThat;
 
 
 public class ApiClient {
 
-	URIBuilder uriBuilder = new URIBuilder();
-	String json;
-	HTTP_METHOD httpMethod = HTTP_METHOD.GET;
+    URIBuilder uriBuilder = new URIBuilder();
+    String json;
+    HTTP_METHOD httpMethod = HTTP_METHOD.GET;
 
-	public enum HTTP_METHOD {
-		GET,
-		PUT,
-		POST
-	}
+    Integer responseCode;
 
-	public ApiClient setPathSegments(String... pathSegment) {
-		uriBuilder.setPathSegments(pathSegment);
-		return this;
-	}
+    public enum HTTP_METHOD {
+        GET,
+        PUT,
+        POST
+    }
 
-	public ApiClient setHttpMethod(HTTP_METHOD httpMethod) {
-		this.httpMethod = httpMethod;
-		return this;
-	}
+    public ApiClient setPathSegments(String... pathSegment) {
+        uriBuilder.setPathSegments(pathSegment);
+        return this;
+    }
 
-	public ApiClient setJson(String json) throws UnsupportedEncodingException {
-		this.json = json;
-		return this;
-	}
+    public ApiClient setHttpMethod(HTTP_METHOD httpMethod) {
+        this.httpMethod = httpMethod;
+        return this;
+    }
 
-	public ApiClient setRequestJson(String json) throws UnsupportedEncodingException {
-		this.json = json;
-		return this;
-	}
+    public ApiClient setJson(String json) throws UnsupportedEncodingException {
+        this.json = json;
+        return this;
+    }
 
-	String getUrl() {
-		return uriBuilder.setScheme("http")
-				.setHost(EndPoints.ip)
-				.setPort(EndPoints.port)
-				.toString();
-	}
+    public ApiClient setRequestJson(String json) throws UnsupportedEncodingException {
+        this.json = json;
+        return this;
+    }
 
-	HttpRequestBase getHttpRequest() {
-		HttpRequestBase httpEntity;
-		if (httpMethod == HTTP_METHOD.POST) {
-			httpEntity = new HttpPost(getUrl());
-		} else if (httpMethod == HTTP_METHOD.PUT) {
-			httpEntity = new HttpPut(getUrl());
-		} else {
-			httpEntity = new HttpGet(getUrl());
-		}
-		return httpEntity;
-	}
+    public ApiClient setResponseCode(Integer responseCode) {
+        this.responseCode = responseCode;
+        return this;
+    }
 
-	public HttpResponse sendRequestAndGetResponse() throws IOException {
-		HttpClient httpClient = HttpClients.createDefault();
-		HttpRequestBase httpRequest = getHttpRequest();;
+    String getUrl() {
+        return uriBuilder.setScheme("http")
+                .setHost(EndPoints.ip)
+                .setPort(EndPoints.port)
+                .toString();
+    }
 
-		HttpResponse httpResponse = httpClient.execute(httpRequest);
-		return httpResponse;
-	}
+    HttpRequestBase getHttpRequest() throws UnsupportedEncodingException {
+        HttpRequestBase httpRequest;
+        if (httpMethod == HTTP_METHOD.POST) {
+
+            HttpPost httpPost = new HttpPost(getUrl());
+            if (json != null) {
+                httpPost.setEntity(new StringEntity(json));
+            }
+            httpRequest = httpPost;
+
+        } else if (httpMethod == HTTP_METHOD.PUT) {
+
+            HttpPut httpPut = new HttpPut(getUrl());
+            httpPut.setEntity(new StringEntity(json));
+            httpRequest = httpPut;
+
+        } else {
+            httpRequest = new HttpGet(getUrl());
+        }
+
+        httpRequest.setHeader("Content-type", "application/json");
+        return httpRequest;
+    }
+
+    public HttpResponse sendRequestAndGetResponse() throws IOException {
+        HttpClient httpClient = HttpClients.createDefault();
+        HttpResponse httpResponse = httpClient.execute(getHttpRequest());
+        if (responseCode != null) {
+            assertThat(httpResponse.getStatusLine().getStatusCode()).isEqualTo(responseCode);
+        }
+        return httpResponse;
+    }
 
 }

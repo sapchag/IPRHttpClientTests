@@ -1,5 +1,6 @@
+import utils.Car.CarUtils;
 import utils.EndPoints;
-import utils.RandomTestCar;
+import utils.Car.RandomTestCar;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import io.restassured.RestAssured;
 import io.restassured.builder.RequestSpecBuilder;
@@ -12,7 +13,6 @@ import org.junit.jupiter.api.*;
 
 import java.math.BigDecimal;
 import java.sql.SQLException;
-import java.util.List;
 
 import static io.restassured.RestAssured.given;
 import static io.restassured.config.JsonConfig.jsonConfig;
@@ -47,7 +47,7 @@ public class RestAssuredPostAddTest {
 		Car carApi = given()
 				.header("Content-type", "application/json")
 				.and()
-				.body(randomCar.getJson())
+				.body(CarUtils.getJson(randomCar))
 				.when()
 				.post(EndPoints.addCar)
 				.then()
@@ -57,7 +57,7 @@ public class RestAssuredPostAddTest {
 
 		randomCar.setId(carApi.getId());
 		assertThat(carApi).isEqualToComparingFieldByField(randomCar);
-		assertThat(Car.getCarFromDb(carApi.getId())).isEqualToComparingFieldByField(randomCar);
+		assertThat(CarUtils.getCarFromDb(carApi.getId())).isEqualToComparingFieldByField(randomCar);
 
 	}
 

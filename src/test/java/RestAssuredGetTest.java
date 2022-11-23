@@ -48,10 +48,6 @@ public class RestAssuredGetTest {
                 .as(new TypeRef<>() {
                 });
 
-        for (User user : users) {
-            user.print();
-        }
-
     }
 
     @Test

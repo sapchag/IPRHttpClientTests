@@ -34,10 +34,6 @@ class GetRestTest {
 				httpResponse.getEntity().getContent(), new TypeReference<>() {
 				});
 
-		for (User user : users) {
-			user.print();
-		}
-
 	}
 
 	@Test
@@ -52,8 +48,6 @@ class GetRestTest {
 		HttpResponse httpResponse = httpClient.execute(httpget);
 		ObjectMapper objectMapper = new ObjectMapper();
 		User user = objectMapper.readValue(httpResponse.getEntity().getContent(), User.class);
-
-		user.print();
 	}
 
 	@Test
@@ -71,11 +65,6 @@ class GetRestTest {
 		List<Car> cars = objectMapper.readValue(
 				httpResponse.getEntity().getContent(), new TypeReference<>() {
 				});
-
-		for (Car car : cars) {
-			car.print();
-		}
-
 
 	}
 

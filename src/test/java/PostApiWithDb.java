@@ -1,5 +1,6 @@
-import utils.RandomTestCar;
-import utils.RandomTestUser;
+import utils.Car.CarUtils;
+import utils.Car.RandomTestCar;
+import utils.User.RandomTestUser;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import models.Car;
 import models.User;
@@ -53,9 +54,6 @@ public class PostApiWithDb {
 
 		Car randomCar = new RandomTestCar();
 
-		randomCar.getJson();
-
-
 		String SAMPLE_URL = "http://77.50.236.203:4880/addCar";
 
 		HttpClient httpClient = HttpClientBuilder.create().build();
@@ -79,8 +77,6 @@ public class PostApiWithDb {
 		HttpResponse httpResponse = httpClient.execute(request);
 
 		car = objectMapper.readValue(httpResponse.getEntity().getContent(), Car.class);
-
-		car.print();
 
 	}
 

@@ -49,8 +49,6 @@ class AddRestTest {
 
 		car = objectMapper.readValue(httpResponse.getEntity().getContent(), Car.class);
 
-		car.print();
-
 	}
 
 	@Test
