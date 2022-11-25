@@ -1,22 +1,9 @@
 package models;
 
 import com.fasterxml.jackson.annotation.JsonInclude;
-import com.fasterxml.jackson.core.JsonProcessingException;
-import com.fasterxml.jackson.core.type.TypeReference;
-import com.fasterxml.jackson.databind.ObjectMapper;
-import org.apache.commons.dbutils.handlers.BeanListHandler;
-import org.apache.http.HttpEntity;
-import utils.ApiClient;
-import utils.DbClient;
-import utils.RestPaths;
 
-import java.io.IOException;
-import java.io.UnsupportedEncodingException;
 import java.math.BigDecimal;
-import java.sql.SQLException;
-import java.util.List;
 import java.util.Objects;
-import java.util.stream.Collectors;
 
 public class Car {
 

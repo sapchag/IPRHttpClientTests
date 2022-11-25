@@ -50,9 +50,7 @@ public class PostApiWithDb_ {
 
         User dbUser = UserUtils.getUserFromDb(randomUser.getId());
         assertThat(userAfterByedCar).isEqualToComparingFieldByField(dbUser);
-        UserUtils.print(userAfterByedCar);
-        System.out.println("__________________________");
-        UserUtils.print(dbUser);
+
     }
 
 }

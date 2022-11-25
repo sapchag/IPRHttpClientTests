@@ -2,10 +2,7 @@ package utils;
 
 import org.apache.http.HttpResponse;
 import org.apache.http.client.HttpClient;
-import org.apache.http.client.methods.HttpGet;
-import org.apache.http.client.methods.HttpPost;
-import org.apache.http.client.methods.HttpPut;
-import org.apache.http.client.methods.HttpRequestBase;
+import org.apache.http.client.methods.*;
 import org.apache.http.client.utils.URIBuilder;
 import org.apache.http.entity.StringEntity;
 import org.apache.http.impl.client.HttpClients;
@@ -27,7 +24,8 @@ public class ApiClient {
     public enum HTTP_METHOD {
         GET,
         PUT,
-        POST
+        POST,
+        DELETE
     }
 
     public ApiClient setPathSegments(String... pathSegment) {
@@ -75,8 +73,14 @@ public class ApiClient {
         } else if (httpMethod == HTTP_METHOD.PUT) {
 
             HttpPut httpPut = new HttpPut(getUrl());
-            httpPut.setEntity(new StringEntity(json));
+            if (json != null) {
+                httpPut.setEntity(new StringEntity(json));
+            }
             httpRequest = httpPut;
+
+        } else if (httpMethod == HTTP_METHOD.DELETE) {
+
+            httpRequest = new HttpDelete(getUrl());
 
         } else {
             httpRequest = new HttpGet(getUrl());

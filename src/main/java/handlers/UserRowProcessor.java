@@ -1,12 +1,10 @@
 package handlers;
 
-import models.Sex;
 import models.User;
 import org.apache.commons.dbutils.BasicRowProcessor;
 
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.time.Year;
 import java.util.LinkedList;
 import java.util.List;
 

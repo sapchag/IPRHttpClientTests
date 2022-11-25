@@ -1,4 +1,3 @@
-import utils.Car.CarUtils;
 import utils.Car.RandomTestCar;
 import utils.User.RandomTestUser;
 import com.fasterxml.jackson.databind.ObjectMapper;

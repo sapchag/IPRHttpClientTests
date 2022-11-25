@@ -32,7 +32,8 @@ public class UserUtils {
     }
 
     public static User getUserFromDb(Integer id) throws SQLException, ClassNotFoundException {
-        return new DbClient().getList("SELECT * FROM person where id=" + id.toString(), new UserHandler()).get(0);
+        List<User> users = new DbClient().getList("SELECT * FROM person where id=" + id.toString(), new UserHandler());
+        return users.size() > 0 ? users.get(0) : null;
     }
 
     public static List<User> getUsersFromDb() throws SQLException, ClassNotFoundException {
@@ -68,6 +69,31 @@ public class UserUtils {
                 .setPathSegments(RestPaths.addUser)
                 .setJson(UserUtils.getJson(user))
                 .setResponseCode(201)
+                .sendRequestAndGetResponse()
+                .getEntity();
+
+        ObjectMapper objectMapper = new ObjectMapper();
+        return objectMapper.readValue(httpEntity.getContent(), User.class);
+    }
+
+    public static User update(User user, int id) throws IOException {
+        HttpEntity httpEntity = new ApiClient()
+                .setHttpMethod(ApiClient.HTTP_METHOD.PUT)
+                .setPathSegments(RestPaths.updateUser, String.valueOf(id))
+                .setJson(UserUtils.getJson(user))
+                .setResponseCode(202)
+                .sendRequestAndGetResponse()
+                .getEntity();
+
+        ObjectMapper objectMapper = new ObjectMapper();
+        return objectMapper.readValue(httpEntity.getContent(), User.class);
+    }
+
+    public static User delete(int id) throws IOException {
+        HttpEntity httpEntity = new ApiClient()
+                .setHttpMethod(ApiClient.HTTP_METHOD.PUT)
+                .setPathSegments(RestPaths.deleteUser, String.valueOf(id))
+                .setResponseCode(204)
                 .sendRequestAndGetResponse()
                 .getEntity();
 
