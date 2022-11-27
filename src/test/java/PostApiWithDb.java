@@ -1,5 +1,5 @@
-import utils.Car.RandomTestCar;
-import utils.User.RandomTestUser;
+import models.RandomTestCar;
+import models.RandomTestUser;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import models.Car;
 import models.User;

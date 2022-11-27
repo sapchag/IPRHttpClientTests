@@ -1,6 +1,6 @@
 import models.User;
 import org.junit.jupiter.api.Test;
-import utils.User.RandomTestUser;
+import models.RandomTestUser;
 import utils.User.UserUtils;
 
 import java.io.IOException;

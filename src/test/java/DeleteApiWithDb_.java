@@ -1,12 +1,10 @@
 import models.User;
 import org.junit.jupiter.api.Test;
-import utils.User.RandomTestUser;
+import models.RandomTestUser;
 import utils.User.UserUtils;
 
 import java.io.IOException;
 import java.sql.SQLException;
-import java.util.List;
-import java.util.Random;
 
 import static org.assertj.core.api.Assertions.assertThat;
 

@@ -60,28 +60,35 @@ public class ApiClient {
                 .toString();
     }
 
-    HttpRequestBase getHttpRequest() throws UnsupportedEncodingException {
-        HttpRequestBase httpRequest;
-        if (httpMethod == HTTP_METHOD.POST) {
+    StringEntity getStringEntity(String json) {
+        StringEntity stringEntity;
+        try {
+            stringEntity = new StringEntity(json);
+        } catch (UnsupportedEncodingException e) {
+            throw new RuntimeException(e);
+        }
+        return stringEntity;
+    }
 
+    HttpRequestBase getHttpRequest() {
+        HttpRequestBase httpRequest;
+
+        if (httpMethod == HTTP_METHOD.POST) {
             HttpPost httpPost = new HttpPost(getUrl());
             if (json != null) {
-                httpPost.setEntity(new StringEntity(json));
+                httpPost.setEntity(getStringEntity(json));
             }
             httpRequest = httpPost;
 
         } else if (httpMethod == HTTP_METHOD.PUT) {
-
             HttpPut httpPut = new HttpPut(getUrl());
             if (json != null) {
-                httpPut.setEntity(new StringEntity(json));
+                httpPut.setEntity(getStringEntity(json));
             }
             httpRequest = httpPut;
 
         } else if (httpMethod == HTTP_METHOD.DELETE) {
-
             httpRequest = new HttpDelete(getUrl());
-
         } else {
             httpRequest = new HttpGet(getUrl());
         }
@@ -90,13 +97,17 @@ public class ApiClient {
         return httpRequest;
     }
 
-    public HttpResponse sendRequestAndGetResponse() throws IOException {
+    public HttpResponse sendRequestAndGetResponse() {
         HttpClient httpClient = HttpClients.createDefault();
-        HttpResponse httpResponse = httpClient.execute(getHttpRequest());
+        HttpResponse httpResponse = null;
+        try {
+            httpResponse = httpClient.execute(getHttpRequest());
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
         if (responseCode != null) {
             assertThat(httpResponse.getStatusLine().getStatusCode()).isEqualTo(responseCode);
         }
         return httpResponse;
     }
-
 }

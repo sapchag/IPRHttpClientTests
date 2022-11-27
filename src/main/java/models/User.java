@@ -18,7 +18,6 @@ public class User {
     public User() {
     }
 
-
     public User(Integer id, String firstName, String secondName, Integer age, String sex, BigDecimal money) {
         this.id = id;
         this.firstName = firstName;
@@ -27,6 +26,16 @@ public class User {
         this.sex = sex;
         this.money = money;
     }
+
+    public User(User user) {
+        this.id = user.id;
+        this.firstName = user.firstName;
+        this.secondName = user.secondName;
+        this.age = user.age;
+        this.sex = user.sex;
+        this.money = user.money;
+    }
+
 
     public Integer getId() {
         return id;
@@ -65,7 +74,7 @@ public class User {
     }
 
     public void setSex(Boolean sex) {
-        this.sex = sex==null ? null : sex ? "MALE" : "FEMALE";
+        this.sex = sex == null ? null : sex ? "MALE" : "FEMALE";
     }
 
     public void setSex(String sex) {

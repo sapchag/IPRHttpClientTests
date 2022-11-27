@@ -1,4 +1,4 @@
-package utils.Car;
+package models;
 
 import models.Car;
 import org.apache.commons.lang3.RandomStringUtils;

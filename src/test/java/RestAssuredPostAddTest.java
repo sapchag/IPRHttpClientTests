@@ -1,6 +1,6 @@
 import utils.Car.CarUtils;
 import utils.EndPoints;
-import utils.Car.RandomTestCar;
+import models.RandomTestCar;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import io.restassured.RestAssured;
 import io.restassured.builder.RequestSpecBuilder;

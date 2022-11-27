@@ -1,4 +1,4 @@
-package utils.User;
+package models;
 
 import models.User;
 import org.apache.commons.lang3.RandomStringUtils;
