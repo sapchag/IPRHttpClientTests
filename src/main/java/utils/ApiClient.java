@@ -12,7 +12,6 @@ import java.io.UnsupportedEncodingException;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
-
 public class ApiClient {
 
     URIBuilder uriBuilder = new URIBuilder();
