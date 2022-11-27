@@ -8,7 +8,7 @@ import models.RandomTestUser;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
-public class PostApiWithDb_ {
+public class PostApiWithDbTest {
 
     UserEntity userEntity = new UserEntity();
     CarEntity carEntity = new CarEntity();

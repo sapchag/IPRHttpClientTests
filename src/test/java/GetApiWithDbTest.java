@@ -9,7 +9,7 @@ import java.util.Random;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
-public class GetApiWithDb_ {
+public class GetApiWithDbTest {
 
     UserEntity userEntity = new UserEntity();
     CarEntity carEntity = new CarEntity();

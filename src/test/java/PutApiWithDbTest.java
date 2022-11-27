@@ -11,7 +11,7 @@ import java.util.Random;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
-public class PutApiWithDb_ {
+public class PutApiWithDbTest {
 
     UserEntity userEntity = new UserEntity();
     CarEntity carEntity = new CarEntity();

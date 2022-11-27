@@ -9,7 +9,7 @@ import java.sql.SQLException;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
-public class DeleteApiWithDb_ {
+public class DeleteApiWithDbTest {
 
     UserEntity userEntity = new UserEntity();
     CarEntity carEntity = new CarEntity();
