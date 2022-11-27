@@ -3,7 +3,6 @@ import entities.UserEntity;
 import models.RandomTestUser;
 import models.User;
 import org.junit.jupiter.api.Test;
-import utils.User.UserUtils;
 
 import java.io.IOException;
 import java.sql.SQLException;
@@ -20,7 +19,7 @@ public class PutApiWithDb_ {
     @Test
     public void put_updateUser() throws IOException, SQLException, ClassNotFoundException {
 
-        List<User> dbUsers = UserUtils.getUsersFromDb();
+        List<User> dbUsers = userEntity.dbGetAll();
         User updatedUser = dbUsers.get(new Random().nextInt(dbUsers.size()));
         User randomUser = new RandomTestUser();
         randomUser.setId(updatedUser.getId());

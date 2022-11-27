@@ -12,8 +12,8 @@ import static utils.RestPaths.*;
 public class UserEntity extends BaseEntity<User> {
 
     public UserEntity() {
-        iDbEntities = new EntitiesApiImpl<User>(RestPaths.user, RestPaths.users, User.class);
-        iApiEntities = new EntitiesDbImpl<User>("SELECT * FROM person", new UserHandler());
+        iApiEntities = new EntitiesApiImpl<User>(RestPaths.user, RestPaths.users, User.class);
+        iDbEntities = new EntitiesDbImpl<User>("SELECT * FROM person", new UserHandler());
         iCrud = new CRUDApiImpl<User>(addUser, updateUser, deleteUser, User.class);
     }
 }

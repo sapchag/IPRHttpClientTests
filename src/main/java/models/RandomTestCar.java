@@ -12,7 +12,7 @@ import java.util.List;
 import java.util.Random;
 
 public class RandomTestCar extends Car {
-	public RandomTestCar() throws SQLException, ClassNotFoundException {
+	public RandomTestCar() {
 
 		String sql = "SELECT type_name FROM engine_type";
 		List<String> engineTypes = new DbClient()
