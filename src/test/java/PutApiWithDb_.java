@@ -1,6 +1,8 @@
+import entities.CarEntity;
+import entities.UserEntity;
+import models.RandomTestUser;
 import models.User;
 import org.junit.jupiter.api.Test;
-import models.RandomTestUser;
 import utils.User.UserUtils;
 
 import java.io.IOException;
@@ -12,16 +14,19 @@ import static org.assertj.core.api.Assertions.assertThat;
 
 public class PutApiWithDb_ {
 
+    UserEntity userEntity = new UserEntity();
+    CarEntity carEntity = new CarEntity();
+
     @Test
     public void put_updateUser() throws IOException, SQLException, ClassNotFoundException {
 
         List<User> dbUsers = UserUtils.getUsersFromDb();
         User updatedUser = dbUsers.get(new Random().nextInt(dbUsers.size()));
         User randomUser = new RandomTestUser();
-
-        User apiResultUser = UserUtils.update(randomUser, updatedUser.getId());
-        User dbResultUser = UserUtils.getUserFromDb(updatedUser.getId());
         randomUser.setId(updatedUser.getId());
+
+        User apiResultUser = userEntity.update(randomUser);
+        User dbResultUser = userEntity.dbGet(updatedUser.getId());
 
         assertThat(apiResultUser).isEqualToComparingFieldByField(randomUser);
         assertThat(dbResultUser).isEqualToComparingFieldByField(randomUser);

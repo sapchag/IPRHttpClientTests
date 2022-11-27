@@ -43,11 +43,6 @@ public class ApiClient {
         return this;
     }
 
-    public ApiClient setRequestJson(String json) throws UnsupportedEncodingException {
-        this.json = json;
-        return this;
-    }
-
     public ApiClient setResponseCode(Integer responseCode) {
         this.responseCode = responseCode;
         return this;
@@ -101,13 +96,16 @@ public class ApiClient {
         HttpClient httpClient = HttpClients.createDefault();
         HttpResponse httpResponse = null;
         try {
+
             httpResponse = httpClient.execute(getHttpRequest());
+            if (responseCode != null) {
+                assertThat(httpResponse.getStatusLine().getStatusCode()).isEqualTo(responseCode);
+            }
+
         } catch (IOException e) {
             throw new RuntimeException(e);
         }
-        if (responseCode != null) {
-            assertThat(httpResponse.getStatusLine().getStatusCode()).isEqualTo(responseCode);
-        }
+
         return httpResponse;
     }
 }

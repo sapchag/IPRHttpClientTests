@@ -1,14 +1,10 @@
 package models;
 
-import com.fasterxml.jackson.annotation.JsonInclude;
-
 import java.math.BigDecimal;
 import java.util.Objects;
 
-public class Car {
+public class Car extends BaseModel {
 
-    @JsonInclude(JsonInclude.Include.NON_NULL)
-    Integer id;
     String engineType;
     String mark;
     String model;
@@ -17,20 +13,12 @@ public class Car {
     public Car() {
     }
 
-    public Car(Integer id, String engineType, String mark, String model, BigDecimal price) {
+    public Car(Long id, String engineType, String mark, String model, BigDecimal price) {
         this.id = id;
         this.engineType = engineType;
         this.mark = mark;
         this.model = model;
         this.price = price;
-    }
-
-    public Integer getId() {
-        return id;
-    }
-
-    public void setId(Integer id) {
-        this.id = id;
     }
 
     public String getEngineType() {
@@ -76,5 +64,10 @@ public class Car {
     @Override
     public int hashCode() {
         return Objects.hash(getId(), getEngineType(), getMark(), getModel(), getPrice());
+    }
+
+    @Override
+    public Car clone() {
+        return new Car(this.id, this.engineType, this.mark, this.model, this.price);
     }
 }

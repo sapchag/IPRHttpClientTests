@@ -5,10 +5,8 @@ import com.fasterxml.jackson.annotation.JsonInclude;
 import java.math.BigDecimal;
 import java.util.Objects;
 
-public class User {
+public class User extends BaseModel {
 
-    @JsonInclude(JsonInclude.Include.NON_NULL)
-    private Integer id;
     private String firstName;
     private String secondName;
     private Integer age;
@@ -18,31 +16,13 @@ public class User {
     public User() {
     }
 
-    public User(Integer id, String firstName, String secondName, Integer age, String sex, BigDecimal money) {
+    public User(Long id, String firstName, String secondName, Integer age, String sex, BigDecimal money) {
         this.id = id;
         this.firstName = firstName;
         this.secondName = secondName;
         this.age = age;
         this.sex = sex;
         this.money = money;
-    }
-
-    public User(User user) {
-        this.id = user.id;
-        this.firstName = user.firstName;
-        this.secondName = user.secondName;
-        this.age = user.age;
-        this.sex = user.sex;
-        this.money = user.money;
-    }
-
-
-    public Integer getId() {
-        return id;
-    }
-
-    public void setId(Integer id) {
-        this.id = id;
     }
 
     public String getFirstName() {
@@ -100,5 +80,10 @@ public class User {
     @Override
     public int hashCode() {
         return Objects.hash(getId(), getFirstName(), getSecondName(), getAge(), getSex(), getMoney());
+    }
+
+    @Override
+    public User clone() {
+        return new User(this.id, this.firstName, this.secondName, this.age, this.sex, this.money);
     }
 }

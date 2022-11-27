@@ -7,12 +7,12 @@ import utils.ApiClient;
 import java.io.IOException;
 import java.util.List;
 
-public class IEntitiesApiImpl<T> implements IEntities {
+public class EntitiesApiImpl<T> implements IEntities {
 
     String itemPath, itemsPath;
     Class<T> tClass;
 
-    public IEntitiesApiImpl(String itemPath, String itemsPath, Class<T> tClass) {
+    public EntitiesApiImpl(String itemPath, String itemsPath, Class<T> tClass) {
         this.itemPath = itemPath;
         this.itemsPath = itemsPath;
         this.tClass = tClass;

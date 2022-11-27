@@ -31,7 +31,7 @@ public class UserUtils {
         return objectMapper.writeValueAsString(user);
     }
 
-    public static User getUserFromDb(Integer id) throws SQLException, ClassNotFoundException {
+    public static User getUserFromDb(Long id) throws SQLException, ClassNotFoundException {
         List<User> users = new DbClient().getList("SELECT * FROM person where id=" + id.toString(), new UserHandler());
         return users.size() > 0 ? users.get(0) : null;
     }
@@ -76,7 +76,7 @@ public class UserUtils {
         return objectMapper.readValue(httpEntity.getContent(), User.class);
     }
 
-    public static User update(User user, int id) throws IOException {
+    public static User update(User user, long id) throws IOException {
         HttpEntity httpEntity = new ApiClient()
                 .setHttpMethod(ApiClient.HTTP_METHOD.PUT)
                 .setPathSegments(RestPaths.updateUser, String.valueOf(id))
@@ -89,16 +89,13 @@ public class UserUtils {
         return objectMapper.readValue(httpEntity.getContent(), User.class);
     }
 
-    public static User delete(int id) throws IOException {
-        HttpEntity httpEntity = new ApiClient()
+    public static void delete(long id) throws IOException {
+        new ApiClient()
                 .setHttpMethod(ApiClient.HTTP_METHOD.PUT)
                 .setPathSegments(RestPaths.deleteUser, String.valueOf(id))
                 .setResponseCode(204)
                 .sendRequestAndGetResponse()
                 .getEntity();
-
-        ObjectMapper objectMapper = new ObjectMapper();
-        return objectMapper.readValue(httpEntity.getContent(), User.class);
     }
 
     public static User buyCar(User user, Car car) throws IOException {

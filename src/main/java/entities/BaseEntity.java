@@ -2,10 +2,11 @@ package entities;
 
 import Interfaces.IEntities;
 import Interfaces.IOperations;
+import models.BaseModel;
 
 import java.util.List;
 
-public abstract class BaseEntity<T> {
+public abstract class BaseEntity<T extends BaseModel> {
 
     protected IEntities<T> iDbEntities;
     protected IEntities<T> iApiEntities;
@@ -27,12 +28,12 @@ public abstract class BaseEntity<T> {
         return iApiEntities.getAll();
     }
 
-    public T add(T entity) {
+    public <T extends BaseModel> T add(T entity) {
         return iOperations.add(entity);
     }
 
-    public T update(T entity) {
-        return iOperations.update(entity);
+    public <T extends BaseModel> T update(T entity) {
+        return (T) iOperations.update(entity);
     }
 
     public void delete(long id) {

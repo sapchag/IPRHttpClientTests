@@ -6,12 +6,12 @@ import utils.DbClient;
 import java.sql.SQLException;
 import java.util.List;
 
-public class IEntitiesDbImpl<T> implements IEntities {
+public class EntitiesDbImpl<T> implements IEntities {
 
     String sql;
     BeanListHandler beanListHandler;
 
-    public IEntitiesDbImpl(String sql, BeanListHandler beanListHandler) {
+    public EntitiesDbImpl(String sql, BeanListHandler beanListHandler) {
         this.sql = sql;
         this.beanListHandler = beanListHandler;
     }

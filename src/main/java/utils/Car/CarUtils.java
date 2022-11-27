@@ -31,7 +31,7 @@ public class CarUtils {
         return objectMapper.writeValueAsString(car);
     }
 
-    public static Car getCarFromDb(int id) throws SQLException, ClassNotFoundException {
+    public static Car getCarFromDb(long id) throws SQLException, ClassNotFoundException {
         return getCarsFromDb().stream().filter(s -> s.getId() == id).collect(Collectors.toList()).get(0);
     }
 

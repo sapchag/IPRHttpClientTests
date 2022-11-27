@@ -1,10 +1,12 @@
 package Interfaces;
 
-public interface IOperations<T extends Object> {
+import models.BaseModel;
 
-    T add(Object entity);
+public interface IOperations<T extends BaseModel> {
 
-    T update(Object entity);
+    <T extends BaseModel> T add(T entity);
+
+    <T extends BaseModel> T update(T entity);
 
     void delete(long id);
 

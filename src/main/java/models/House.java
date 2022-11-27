@@ -2,9 +2,8 @@ package models;
 
 import java.math.BigDecimal;
 
-public class House {
+public class House extends BaseModel {
 
-    Integer id;
     Integer floorCount;
     BigDecimal price;
 

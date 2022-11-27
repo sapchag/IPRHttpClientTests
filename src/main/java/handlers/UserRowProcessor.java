@@ -26,7 +26,7 @@ public class UserRowProcessor extends BasicRowProcessor {
     @Override
     public Object toBean(ResultSet rs, Class type) throws SQLException {
         User user = new User();
-        user.setId(rs.getInt("id"));
+        user.setId(rs.getLong("id"));
         user.setAge(rs.getInt("age"));
         user.setMoney(rs.getBigDecimal("money"));
         user.setFirstName(rs.getString("first_name"));
