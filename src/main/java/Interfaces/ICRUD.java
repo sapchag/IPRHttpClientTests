@@ -2,7 +2,7 @@ package Interfaces;
 
 import models.BaseModel;
 
-public interface IOperations<T extends BaseModel> {
+public interface ICRUD<T extends BaseModel> {
 
     <T extends BaseModel> T add(T entity);
 

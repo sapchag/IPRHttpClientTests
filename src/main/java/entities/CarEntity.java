@@ -2,7 +2,7 @@ package entities;
 
 import Interfaces.EntitiesApiImpl;
 import Interfaces.EntitiesDbImpl;
-import Interfaces.OperationsApiImpl;
+import Interfaces.CRUDApiImpl;
 import models.Car;
 import org.apache.commons.dbutils.handlers.BeanListHandler;
 
@@ -16,6 +16,6 @@ public class CarEntity extends BaseEntity<Car> {
                 "FROM car inner join engine_type " +
                 "on car.engine_type_id=engine_type.id";
         iApiEntities = new EntitiesDbImpl<Car>(sql, new BeanListHandler<>(Car.class));
-        iOperations = new OperationsApiImpl<Car>(addCar, updateCar, deleteCar, Car.class);
+        iCrud = new CRUDApiImpl<Car>(addCar, updateCar, deleteCar, Car.class);
     }
 }

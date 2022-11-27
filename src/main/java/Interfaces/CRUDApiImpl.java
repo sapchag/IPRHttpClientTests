@@ -9,12 +9,12 @@ import utils.ApiClient;
 import java.io.IOException;
 import java.io.UnsupportedEncodingException;
 
-public class OperationsApiImpl<T extends BaseModel> implements IOperations<T> {
+public class CRUDApiImpl<T extends BaseModel> implements ICRUD<T> {
 
     String addPath, updatePath, deletePath;
     Class<T> tClass;
 
-    public OperationsApiImpl(String addPath, String updatePath, String deletePath, Class<T> tClass) {
+    public CRUDApiImpl(String addPath, String updatePath, String deletePath, Class<T> tClass) {
         this.addPath = addPath;
         this.updatePath = updatePath;
         this.deletePath = deletePath;
